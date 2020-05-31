@@ -28,8 +28,6 @@ bool Pracownik_Administracji::Zaplanuj_GrTrening(Data data, Czas czas, int czas_
 	return false;
 }
 
-
-
 bool Pracownik_Administracji::Edytuj_GrTrening(GrTrening* grTrening, Data data, Czas czas, int czas_trwania, string opis, int id)
 {
 
