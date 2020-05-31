@@ -8,7 +8,7 @@ public:
 	Karnet();
 	Karnet(int okres, int id);
 	bool GetStatus();
-
+	bool Przedluz(int nowy_okres);
 
 };
 
