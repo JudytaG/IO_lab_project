@@ -28,11 +28,7 @@ bool Pracownik_Administracji::Zaplanuj_GrTrening(Data data, Czas czas, int czas_
 	return false;
 }
 
-bool Pracownik_Administracji::Zaplanuj_GrTrening(Data data, Czas czas, int czas_trwania, string opis, int id)
-{
 
-	return false;
-}
 
 bool Pracownik_Administracji::Edytuj_GrTrening(GrTrening* grTrening, Data data, Czas czas, int czas_trwania, string opis, int id)
 {
@@ -42,8 +38,8 @@ bool Pracownik_Administracji::Edytuj_GrTrening(GrTrening* grTrening, Data data, 
 
 bool Pracownik_Administracji::Usun_GrTrening(GrTrening* grTrening)
 {
-
-	return false;
+	delete grTrening;
+	return true;
 }
 
 void Pracownik_Administracji::Wyswietl_liste_uczestnikow(GrTrening grTrening)

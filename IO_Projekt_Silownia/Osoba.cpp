@@ -1,5 +1,14 @@
 #include "Osoba.h"
 
+
+Osoba::Osoba()
+{
+
+
+
+}
+
+
 bool Osoba::zmien_haslo(string nowe_haslo)
 {
 	this->haslo = nowe_haslo;
