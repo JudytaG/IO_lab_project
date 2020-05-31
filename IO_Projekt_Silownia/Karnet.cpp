@@ -15,3 +15,9 @@ bool Karnet::GetStatus()
 
 
 }
+
+bool Karnet::Przedluz(int nowy_okres)
+{
+	
+
+}
