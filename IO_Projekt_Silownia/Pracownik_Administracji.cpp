@@ -34,6 +34,7 @@ bool Pracownik_Administracji::Edytuj_GrTrening(GrTrening* grTrening, Data data, 
 
 bool Pracownik_Administracji::Usun_GrTrening(GrTrening* grTrening)
 {
+	delete grTrening;
 	grTrening = NULL;
 	return false;
 }

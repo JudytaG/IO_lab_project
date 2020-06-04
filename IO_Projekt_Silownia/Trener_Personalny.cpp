@@ -15,6 +15,7 @@ bool Trener_Personalny::Edytuj_trening(Trening* trening, Data data, Czas godzina
 
 bool Trener_Personalny::Usun_trening(Trening* trening)
 {
+	delete trening;
 	trening = NULL;
 	return true;
 }
