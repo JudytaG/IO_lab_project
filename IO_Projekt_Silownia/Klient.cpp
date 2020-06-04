@@ -10,7 +10,12 @@ void Klient::Wyswietl_kalendarz()
 {
 	cout << "Wydarzenia:" << endl;
 	for (int i = 0; i < lista_wydarzen.size(); i++) {
-		lista_wydarzen[i]->Wyswietl();
+		if(lista_wydarzen[i]!=NULL)
+			lista_wydarzen[i]->Wyswietl();
+		else {
+			lista_wydarzen.erase(lista_wydarzen.begin() + i);
+			i--;
+		}
 	}
 }
 

@@ -18,6 +18,12 @@ bool KalendarzG::Dodaj_Wydarzenie(Wydarzenie* wydarzenie)
 void KalendarzG::Wyswietl()
 {
 	for (int i = 0; i < wydarzenia.size(); i++) {
-		wydarzenia[i]->Wyswietl();
+		if (wydarzenia[i] != NULL) {
+			wydarzenia[i]->Wyswietl();
+		}
+		else {
+			wydarzenia.erase(wydarzenia.begin() + i);
+			i--;
+		}
 	}
 }
