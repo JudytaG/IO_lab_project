@@ -17,6 +17,7 @@ bool Lista_Klientow::Dodaj_Klienta(Klient* klient)
 
 void Lista_Klientow::Wyswietl()
 {
+	cout << "Lista klientow:" << endl;
 	for (int i = 0; i < klienci.size(); i++) {
 		klienci[i]->Wyswietl();
 	}

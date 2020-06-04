@@ -30,14 +30,14 @@ void Klient::Sprawdz_status()
 
 void Klient::Wyswietl()
 {
-	dynamic_cast<Osoba*> (this)->Wyswietl();
-	cout << nr_telefonu << " " << adres_email << endl;
+	cout << login << " " << haslo << " " << imie << " " << nazwisko << " " << id << " " << data_urodzenia.dzien << "-" << data_urodzenia.miesiac << "-" << data_urodzenia.rok << " "<< nr_telefonu << " " << adres_email << endl;
 }
 
 bool Klient::Zapisz_do_GrTrening(GrTrening* grTrening)
 {
 	if (grTrening != nullptr) {
-		grTrening->Dopisz(this);
+		grTrening->DodajUczestnika(this);
+		lista_wydarzen.push_back(grTrening);
 		return true;
 	}
 	return false;

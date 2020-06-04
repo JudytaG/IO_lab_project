@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 struct Data {
 	int dzien=1;
 	int miesiac=1;

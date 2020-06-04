@@ -30,9 +30,6 @@
     <ClCompile Include="Pracownik_Administracji.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Lista_uczestnkow.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="Wydarzenie.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -63,9 +60,6 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Pracownik_Administracji.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Lista_uczestnkow.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Wydarzenie.h">

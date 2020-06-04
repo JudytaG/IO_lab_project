@@ -16,5 +16,5 @@ bool Osoba::edytuj_dane(string Imie, string Nazwisko, Data Data_urodzenia)
 
 void Osoba::Wyswietl()
 {
-	cout << login << " " << haslo << " " << imie << " " << nazwisko << " " << id << " " << data_urodzenia.dzien << "-" << data_urodzenia.miesiac << "-" << data_urodzenia.rok << endl;
+	cout << login << " " << haslo << " " << imie << " " << nazwisko << " " << id << " " << data_urodzenia.dzien << "-" << data_urodzenia.miesiac << "-" << data_urodzenia.rok<< " "<<endl;
 }
