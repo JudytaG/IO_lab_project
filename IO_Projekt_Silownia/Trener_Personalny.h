@@ -12,7 +12,7 @@ private:
 public:
 	Trener_Personalny(string Login, string Haslo, string Imie, string Nazwisko, int Id, Data Data_urodzenia, int nr_tel) :
 		Osoba(Login, Haslo, Imie, Nazwisko, Id, Data_urodzenia), nr_telefonu(nr_tel) {};
-	bool Zaplanuj_trening(Data data, Czas godzina, Czas czas_trwania,string opis, Klient* klient);
+	TreningError Zaplanuj_trening(Data data, Czas godzina, Czas czas_trwania,string opis, Klient* klient,int id);
 	bool Edytuj_trening(Trening* trening, Data data, Czas godzina, Czas czas_trwania);
 	bool Usun_trening(Trening* trening);
 	bool Dodaj_opis(Trening* trening, string opis);
@@ -21,5 +21,8 @@ public:
 	bool Zmien_status(Trening* trening, string status);
 	bool Dodaj_wydarzenie(Wydarzenie* wydarzenie);
 	void Wyswietl_kalendarz();
+	bool JestDostepny(Data data, Czas poczatek, Czas dlugoscTrwania);
+	vector<Wydarzenie*> GetWydarzenia() { return lista_wydarzen; };
+	Wydarzenie* GetWydarzenieWithID(int id);
 };
 

@@ -19,18 +19,22 @@ void Klient::Wyswietl_kalendarz()
 	}
 }
 
-bool Klient::Dodaj_karnet(Karnet* nowy_karnet)
+KarnetError Klient::Dodaj_karnet(Karnet* nowy_karnet)
 {
+	if (karnet != nullptr) {
+		return KarnetError::KarnetJuzPrzypisany;
+	}
+	nowy_karnet->SetId(this->GetId());
 	this->karnet = nowy_karnet;
-	return true;
+	return KarnetError::NoError;
 }
 
-void Klient::Sprawdz_status()
+bool Klient::Sprawdz_status()
 {
-	if (karnet!=nullptr && karnet->GetStatus())
-		cout << "Aktywny" << endl;
-	else
-		cout << "Nieaktywny" << endl;
+	if (karnet == nullptr || karnet->GetStatus())
+		return false;
+	return true;
+	
 }
 
 void Klient::Wyswietl()
@@ -41,9 +45,50 @@ void Klient::Wyswietl()
 bool Klient::Zapisz_do_GrTrening(GrTrening* grTrening)
 {
 	if (grTrening != nullptr) {
-		grTrening->DodajUczestnika(this);
-		lista_wydarzen.push_back(grTrening);
-		return true;
+		if (this->JestDostepny(grTrening->GetData(), grTrening->GetGodzina(), grTrening->GetCzasTrwania())) {
+			grTrening->DodajUczestnika(this);
+			lista_wydarzen.push_back(grTrening);
+			return true;
+		}
 	}
 	return false;
+}
+
+bool Klient::JestDostepny(Data data, Czas poczatek, Czas dlugoscTrwania)
+{
+	Czas koniec;
+	koniec.godzina = 0;
+	koniec.minuty = poczatek.minuty + dlugoscTrwania.minuty;
+	if (koniec.minuty >= 60) {
+		koniec.godzina = 1;
+		koniec.minuty = koniec.minuty % 60;
+	}
+	koniec.godzina += poczatek.godzina + dlugoscTrwania.godzina;
+
+	for (int i = 0; i < lista_wydarzen.size(); i++) {
+		if (lista_wydarzen[i]->GetData() == data) {
+			Czas koniecLista;
+			koniecLista.godzina = 0;
+			koniecLista.minuty = lista_wydarzen[i]->GetGodzina().minuty + lista_wydarzen[i]->GetCzasTrwania().minuty;
+			if (koniecLista.minuty >= 60) {
+				koniecLista.godzina = 1;
+				koniecLista.minuty = koniecLista.minuty % 60;
+			}
+			koniecLista.godzina += lista_wydarzen[i]->GetGodzina().godzina + lista_wydarzen[i]->GetCzasTrwania().godzina;
+			if (!(lista_wydarzen[i]->GetGodzina() > koniec || poczatek > koniecLista)) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+Wydarzenie* Klient::GetWydarzenieWithID(int id)
+{
+	for (int i = 0; i < lista_wydarzen.size(); i++) {
+		if (lista_wydarzen[i]->GetId() == id) {
+			return lista_wydarzen[i];
+		}
+	}
+	return nullptr;
 }

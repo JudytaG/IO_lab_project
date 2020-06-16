@@ -3,7 +3,6 @@
 GrTrening::GrTrening(Data Data, Czas Godzina, Czas Czas_trwania, int Id, string Status, string Opis, Trener_Personalny* Trener):
 	Wydarzenie(Data, Godzina, Czas_trwania, Id, Status, Opis), trener(Trener)
 {
-	Trener->Dodaj_wydarzenie(this);
 }
 
 void GrTrening::Wyswietl()

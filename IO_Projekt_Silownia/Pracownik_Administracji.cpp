@@ -5,25 +5,41 @@ void Pracownik_Administracji::Wyswietl_kalendarz(KalendarzG* kalendarz)
 	kalendarz->Wyswietl();
 }
 
-bool Pracownik_Administracji::Dodaj_karnet(int okres, int id, Klient* klient)
+KarnetError Pracownik_Administracji::Dodaj_karnet(int okres, Klient* klient)
 {
-	Karnet* nowy_karnet = new Karnet(okres, id);
-	klient->Dodaj_karnet(nowy_karnet);
-	return true;
+	Karnet* nowy_karnet = new Karnet(okres);
+	return klient->Dodaj_karnet(nowy_karnet);
 }
 
 bool Pracownik_Administracji::Edytuj_Karnet(Karnet* karnet, int nowy_okres)
 {
 	karnet->Przedluz(nowy_okres);
-	return false;
+	return true;
 }
 
-GrTrening* Pracownik_Administracji::Zaplanuj_GrTrening(Data data, Czas czas, Czas czas_trwania, string opis, int id, Trener_Personalny* trener)
+TreningError Pracownik_Administracji::Zaplanuj_GrTrening(GrTrening* grTrening)
 {
-	string status = "utworzony";
-	GrTrening* trening = new GrTrening(data, czas, czas_trwania, id, status, opis, trener);
-	KalendarzG::getInstance()->Dodaj_Wydarzenie(trening);
-	return trening;
+	if ( !grTrening->GetTrener()->JestDostepny(grTrening->GetData(),grTrening->GetGodzina(),grTrening->GetCzasTrwania()) ) {
+		delete grTrening;
+		return TreningError::TrenerZajety;
+	}
+	vector<Wydarzenie*> wydarzenia = KalendarzG::getInstance()->GetWydarzenia();
+	for (int i = 0; i < wydarzenia.size(); i++) {
+		if (wydarzenia[i]->GetId() == grTrening->GetId()) {
+			delete grTrening;
+			return TreningError::WrongId;
+		}
+	}
+	vector<Wydarzenie*> wydarzenia_trenera = grTrening->GetTrener()->GetWydarzenia();
+	for (int i = 0; i < wydarzenia_trenera.size(); i++) {
+		if (wydarzenia_trenera[i]->GetId() == grTrening->GetId()) {
+			delete grTrening;
+			return TreningError::WrongId;
+		}
+	}
+	grTrening->GetTrener()->Dodaj_wydarzenie(grTrening);
+	KalendarzG::getInstance()->Dodaj_Wydarzenie(grTrening);
+	return TreningError::NoError;
 }
 
 bool Pracownik_Administracji::Edytuj_GrTrening(GrTrening* grTrening, Data data, Czas czas, Czas czas_trwania, string opis, int id)

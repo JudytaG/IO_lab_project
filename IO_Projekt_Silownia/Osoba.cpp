@@ -18,3 +18,4 @@ void Osoba::Wyswietl()
 {
 	cout << login << " " << haslo << " " << imie << " " << nazwisko << " " << id << " " << data_urodzenia.dzien << "-" << data_urodzenia.miesiac << "-" << data_urodzenia.rok<< " "<<endl;
 }
+

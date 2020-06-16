@@ -157,6 +157,7 @@
     <ClCompile Include="Karnet.cpp" />
     <ClCompile Include="Klient.cpp" />
     <ClCompile Include="Lista_Klientow.cpp" />
+    <ClCompile Include="Lista_Pracownikow.cpp" />
     <ClCompile Include="Osoba.cpp" />
     <ClCompile Include="Pracownik_Administracji.cpp" />
     <ClCompile Include="Trener_Personalny.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Karnet.h" />
     <ClInclude Include="Klient.h" />
     <ClInclude Include="Lista_Klientow.h" />
+    <ClInclude Include="Lista_Pracownikow.h" />
     <ClInclude Include="Osoba.h" />
     <ClInclude Include="Pomocnicze.h" />
     <ClInclude Include="Pracownik_Administracji.h" />

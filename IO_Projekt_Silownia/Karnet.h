@@ -8,8 +8,9 @@ private:
 	int dni_waznosci;
 	int id;
 public:
-	Karnet(int Okres, int Id);
+	Karnet(int Okres);
 	bool GetStatus() { return status; };
 	bool Przedluz(int Nowy_okres);
+	void SetId(int Id) { id = Id; };
 };
 

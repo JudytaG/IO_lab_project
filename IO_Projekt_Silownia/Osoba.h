@@ -19,5 +19,7 @@ public:
 	bool edytuj_dane(string Imie, string Nazwisko, Data Data_urodzenia);
 	void Wyswietl();
 	string GetNazwisko() { return nazwisko; };
+	string GetLogin() { return login; };
+	int GetId() { return id; };
 };
 

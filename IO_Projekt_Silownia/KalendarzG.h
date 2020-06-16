@@ -14,6 +14,7 @@ public:
 	static KalendarzG* getInstance();
 	bool Dodaj_Wydarzenie(Wydarzenie* wydarzenie);
 	void Wyswietl();
+	vector<Wydarzenie*> GetWydarzenia() { return wydarzenia; };
 };
 
 

@@ -12,9 +12,9 @@ public:
 	Pracownik_Administracji(string Login, string Haslo, string Imie, string Nazwisko, int Id, Data Data_urodzenia) :
 		Osoba(Login, Haslo, Imie, Nazwisko,Id, Data_urodzenia) {};
 	void Wyswietl_kalendarz(KalendarzG* kalendarz);
-	bool Dodaj_karnet(int okres, int id, Klient* klient);
+	KarnetError Dodaj_karnet(int okres, Klient* klient);
 	bool Edytuj_Karnet(Karnet* karnet,int nowy_okres);
-	GrTrening* Zaplanuj_GrTrening(Data data, Czas czas, Czas czas_trwania, string opis, int id,Trener_Personalny* Trener);
+	TreningError Zaplanuj_GrTrening(GrTrening* grTrening);
 	bool Edytuj_GrTrening(GrTrening* grTrening,Data data, Czas czas, Czas czas_trwania, string opis, int id);
 	bool Usun_GrTrening(GrTrening* grTrening);
 	void Wyswietl_liste_uczestnikow(GrTrening* grTrening);

@@ -17,5 +17,6 @@ public:
 	bool DodajUczestnika(Klient * klient);
 	void WyswietlUczestnikow();
 	bool EdytujTrening(Data data, Czas czas, Czas czas_trwania, string opis, int id);
+	Trener_Personalny* GetTrener() { return trener; };
 };
 

@@ -11,16 +11,20 @@ private:
 	int nr_telefonu;
 	string adres_email;
 	vector<Wydarzenie*> lista_wydarzen;
-	Karnet* karnet=NULL;
+	Karnet* karnet=nullptr;
 
 public:
 	Klient(string Login, string Haslo, string Imie, string Nazwisko, Data Data_urodzenia, int Id, int nr_tel,string Adres_email) :
 		Osoba(Login, Haslo, Imie, Nazwisko, Id, Data_urodzenia), nr_telefonu(nr_tel),adres_email(Adres_email) {};
 	bool Dodaj_wydarzenie(Wydarzenie* wydarzenie);
 	void Wyswietl_kalendarz();
-	bool Dodaj_karnet(Karnet* nowy_karnet);
-	void Sprawdz_status();
+	KarnetError Dodaj_karnet(Karnet* nowy_karnet);
+	bool Sprawdz_status();
 	void Wyswietl();
 	bool Zapisz_do_GrTrening(GrTrening* grTrening);
+	Karnet* GetKarnet() { return karnet; };
+	vector<Wydarzenie*> GetWydarzenia() { return lista_wydarzen; };
+	bool JestDostepny(Data data, Czas poczatek, Czas dlugoscTrwania);
+	Wydarzenie* GetWydarzenieWithID(int id);
 };
 

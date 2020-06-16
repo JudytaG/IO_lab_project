@@ -3,8 +3,6 @@
 Trening::Trening(Data Data, Czas Godzina, Czas Czas_trwania, int Id, string Status, string Opis, Klient* Klient, Trener_Personalny* Trener) :
 	Wydarzenie(Data, Godzina, Czas_trwania, Id, Status, Opis), klient(Klient), trener(Trener)
 {
-	Klient->Dodaj_wydarzenie(this);
-	Trener->Dodaj_wydarzenie(this);
 }
 
 void Trening::Wyswietl()

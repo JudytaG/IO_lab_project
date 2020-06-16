@@ -1,10 +1,29 @@
 #include "Trener_Personalny.h"
 
-bool Trener_Personalny::Zaplanuj_trening(Data data, Czas godzina, Czas czas_trwania, string opis, Klient* klient)
+TreningError Trener_Personalny::Zaplanuj_trening(Data data, Czas godzina, Czas czas_trwania, string opis, Klient* klient,int id)
 {
 	string status = "Zaplanowany";
-	Trening* nowy_trening = new Trening(data, godzina, czas_trwania, lista_wydarzen.size(), status, opis, klient, this);
-	return true;
+	Trening* nowy_trening = new Trening(data, godzina, czas_trwania, id, status, opis, klient, this);
+	if (!klient->JestDostepny(data,godzina,czas_trwania)) {
+		delete nowy_trening;
+		return TreningError::KlientZajety;
+	}
+	if (!this->JestDostepny(data, godzina, czas_trwania)) {
+		delete nowy_trening;
+		return TreningError::TrenerZajety;
+	}
+	vector<Wydarzenie*> wydarzenia_klienta = klient->GetWydarzenia();
+	for (int i = 0; i < wydarzenia_klienta.size(); i++) {
+		if (wydarzenia_klienta[i]->GetId() == id)
+			return TreningError::WrongId;
+	}
+	for (int i = 0; i < lista_wydarzen.size(); i++) {
+		if (lista_wydarzen[i]->GetId() == id)
+			return TreningError::WrongId;
+	}
+	klient->Dodaj_wydarzenie(nowy_trening);
+	this->Dodaj_wydarzenie(nowy_trening);
+	return TreningError::NoError;
 }
 
 bool Trener_Personalny::Edytuj_trening(Trening* trening, Data data, Czas godzina, Czas czas_trwania)
@@ -61,4 +80,43 @@ void Trener_Personalny::Wyswietl_kalendarz()
 			i--;
 		}
 	}
+}
+
+bool Trener_Personalny::JestDostepny(Data data, Czas poczatek, Czas dlugoscTrwania)
+{
+	Czas koniec;
+	koniec.godzina = 0;
+	koniec.minuty = poczatek.minuty + dlugoscTrwania.minuty;
+	if (koniec.minuty >= 60) {
+		koniec.godzina = 1;
+		koniec.minuty = koniec.minuty % 60;
+	}
+	koniec.godzina += poczatek.godzina + dlugoscTrwania.godzina;
+
+	for (int i = 0; i < lista_wydarzen.size(); i++) {
+		if (lista_wydarzen[i]->GetData() == data) {
+			Czas koniecLista;
+			koniecLista.godzina = 0;
+			koniecLista.minuty = lista_wydarzen[i]->GetGodzina().minuty + lista_wydarzen[i]->GetCzasTrwania().minuty;
+			if (koniecLista.minuty >= 60) {
+				koniecLista.godzina = 1;
+				koniecLista.minuty = koniecLista.minuty % 60;
+			}
+			koniecLista.godzina += lista_wydarzen[i]->GetGodzina().godzina + lista_wydarzen[i]->GetCzasTrwania().godzina;
+			if (!(lista_wydarzen[i]->GetGodzina() > koniec || poczatek > koniecLista)) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+Wydarzenie* Trener_Personalny::GetWydarzenieWithID(int id)
+{
+	for (int i = 0; i < lista_wydarzen.size(); i++) {
+		if (lista_wydarzen[i]->GetId() == id) {
+			return lista_wydarzen[i];
+		}
+	}
+	return nullptr;
 }

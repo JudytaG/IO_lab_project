@@ -10,7 +10,8 @@ private:
 	vector<Klient*> klienci;
 public:
 	static Lista_Klientow* getInstance();
-	bool Dodaj_Klienta(Klient* klient);
+	OsobaError Dodaj_Klienta(Klient* klient);
 	void Wyswietl();
+	vector<Klient*> GetKlienci() { return klienci; };
 };
 
