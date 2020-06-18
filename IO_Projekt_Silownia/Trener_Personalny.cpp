@@ -8,6 +8,10 @@ TreningError Trener_Personalny::Zaplanuj_trening(Data data, Czas godzina, Czas c
 		delete nowy_trening;
 		return TreningError::KlientZajety;
 	}
+	if (klient->GetKarnet() == nullptr || !klient->GetKarnet()->GetStatus()) {
+		delete nowy_trening;
+		return TreningError::BrakWaznegoKarnetu;
+	}
 	if (!this->JestDostepny(data, godzina, czas_trwania)) {
 		delete nowy_trening;
 		return TreningError::TrenerZajety;

@@ -21,7 +21,7 @@ public:
 	KarnetError Dodaj_karnet(Karnet* nowy_karnet);
 	bool Sprawdz_status();
 	void Wyswietl();
-	bool Zapisz_do_GrTrening(GrTrening* grTrening);
+	TreningError Zapisz_do_GrTrening(GrTrening* grTrening);
 	Karnet* GetKarnet() { return karnet; };
 	vector<Wydarzenie*> GetWydarzenia() { return lista_wydarzen; };
 	bool JestDostepny(Data data, Czas poczatek, Czas dlugoscTrwania);

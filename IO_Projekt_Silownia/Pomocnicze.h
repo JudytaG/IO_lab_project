@@ -27,7 +27,8 @@ enum class TreningError {
 	NoError,
 	TrenerZajety,
 	KlientZajety,
-	WrongId
+	WrongId,
+	BrakWaznegoKarnetu
 };
 
 enum class KarnetError {

@@ -31,7 +31,7 @@ KarnetError Klient::Dodaj_karnet(Karnet* nowy_karnet)
 
 bool Klient::Sprawdz_status()
 {
-	if (karnet == nullptr || karnet->GetStatus())
+	if (karnet == nullptr || !karnet->GetStatus())
 		return false;
 	return true;
 	
@@ -42,16 +42,19 @@ void Klient::Wyswietl()
 	cout << login << " " << haslo << " " << imie << " " << nazwisko << " " << id << " " << data_urodzenia.dzien << "-" << data_urodzenia.miesiac << "-" << data_urodzenia.rok << " "<< nr_telefonu << " " << adres_email << endl;
 }
 
-bool Klient::Zapisz_do_GrTrening(GrTrening* grTrening)
+TreningError Klient::Zapisz_do_GrTrening(GrTrening* grTrening)
 {
+	if (karnet == nullptr || !karnet->GetStatus()) {
+		return TreningError::BrakWaznegoKarnetu;
+	}
 	if (grTrening != nullptr) {
 		if (this->JestDostepny(grTrening->GetData(), grTrening->GetGodzina(), grTrening->GetCzasTrwania())) {
 			grTrening->DodajUczestnika(this);
 			lista_wydarzen.push_back(grTrening);
-			return true;
+			return TreningError::NoError;
 		}
 	}
-	return false;
+	return TreningError::KlientZajety;
 }
 
 bool Klient::JestDostepny(Data data, Czas poczatek, Czas dlugoscTrwania)
